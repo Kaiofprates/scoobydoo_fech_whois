@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const fs  = require('fs');
 const axios = require('axios');
-let url = "rockcontent.com.br";
+let url = "bb.com.br";
 
 
 
@@ -28,9 +28,9 @@ let domain  = await axios.get(`https://rdap.registro.br/domain/${url}`).then((re
 return response.data;
 });
 console.log(domain);
-//let data  = JSON.stringify(domain);
-//console.log(domain.entities[0].handle);
-//fs.writeFileSync(`${cnpj}.json`,data);
+let data  = JSON.stringify(domain);
+console.log(domain.entities[0].handle);
+fs.writeFileSync(`${url}.json`,data);
 
    let dados =  await axios.get(`https://cnpjs.rocks/cnpj/${domain.entities[0].handle}`)
     .then(function (response) {
