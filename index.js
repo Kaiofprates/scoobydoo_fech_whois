@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const fs  = require('fs');
 const axios = require('axios');
-let url = "rockcontent.com.br";
+let url = "fasa.edu.br";
 
 
 
@@ -11,15 +11,30 @@ async function getPage(content){
       xmlMode: true 
   });
   let dados_cnpj  = $('li').map((e,ele)=>ele);
-  dados_cnpj.map((e)=>{
+  let resultJson  = {};
+
+  await dados_cnpj.map((e)=>{
   try{
-    let chave = dados_cnpj[e].children[0].data;
+    let chave = dados_cnpj[e].children[0].data.replace(':','')
     let valor = dados_cnpj[e].children[0].next.children[0].data;
-    console.log(` ${chave} ${valor} `)
+    if(resultJson[chave]){
+     if(typeof(resultJson[chave]) == 'string'){
+       resultJson[chave] = resultJson[chave].split();
+     }
+     resultJson[chave].push(valor)
+    }else{
+      resultJson[chave] = valor
+    }
+    //console.log(` ${chave} ${valor} `)
   }catch(err){
 
   }    
   });
+let data  = JSON.stringify(resultJson);
+//fs.writeFileSync(`${url}.json`,data);
+//return(resultJson);
+console.log(data)
+
 }
 
 
