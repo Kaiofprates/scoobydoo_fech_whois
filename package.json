@@ -1,7 +1,7 @@
 {
   "name": "ScoobyDoo",
   "version": "1.0.0",
-  "description": "fetches whois data from websites using website webscraping with revenue data and registro.com", 
+  "description": "fetches whois data from websites using website webscraping with revenue data and registro.com",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
